@@ -13,7 +13,7 @@ export const GetAllProducts = () => {
   return (
     <section>
       <div className="max-w-screen-xl px-4 py-8 mx-auto">
-        <div className="grid grid-cols-2 mt-8 lg:grid-cols-4 gap-x-4 gap-y-8">
+        <div className="grid md:grid-cols-2 mt-8 lg:grid-cols-4 gap-x-4 gap-y-8">
           {data?.map((product) => (
             <Link
               key={product._id}

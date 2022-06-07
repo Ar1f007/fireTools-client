@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import { useQuery } from 'react-query';
 import authFetch from '../../config/axios';
 import { Ratings } from '../../components';
+import { motion } from 'framer-motion';
 
 const fetchReviews = async () => {
   const { data } = await authFetch('/reviews');
@@ -16,7 +17,13 @@ export const Reviews = () => {
   const { data } = useQuery('data', fetchReviews);
 
   return (
-    <section className="py-16">
+    <motion.section
+      initial={{ y: 300, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, delay: 0.4, type: 'spring', bounce: 0.2 }}
+      viewport={{ once: true }}
+      className="py-16"
+    >
       <section className="bg-slate-50 rounded">
         <section className="max-w-screen-2xl mx-auto relative lg:px-20 xl:px-0">
           <div className="px-4 py-16 mx-auto sm:px-6 lg:px-0 lg:mr-0 sm:py-24 max-w-[1400px]">
@@ -190,6 +197,6 @@ export const Reviews = () => {
           </div>
         </section>
       </section>
-    </section>
+    </motion.section>
   );
 };

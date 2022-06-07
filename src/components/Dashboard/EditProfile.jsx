@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { motion } from 'framer-motion';
 import authFetch from '../../config/axios';
 import customAlert from '../../utils/CustomAlert';
 
@@ -26,7 +27,12 @@ export const EditProfile = ({ user, handleEditProfile, refetch }) => {
   };
 
   return (
-    <div className="py-3">
+    <motion.div
+      initial={{ y: '-1vh' }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.2 }}
+      className="py-3"
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Name */}
         <div className="form-control w-full max-w-xs mb-2">
@@ -139,6 +145,6 @@ export const EditProfile = ({ user, handleEditProfile, refetch }) => {
           </button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 };

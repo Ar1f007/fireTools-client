@@ -1,8 +1,15 @@
 # FireTools
 
-A MERN stack web application built for manufacturer company FireTools where take order for electrical tools such as wire and cable crimpers, cable tie gun etc.
+A MERN stack B2B web application built for manufacturer company FireTools where customers can make order for electrical tools such as wire and cable crimpers, cable tie gun etc.
 
-## Task description about the project can be found [here](https://github.com/ProgrammingHero1/Manufacturer-website-assignment/blob/main/task_description.md)
+### Task description about the project can be found [here](https://github.com/ProgrammingHero1/Manufacturer-website-assignment/blob/main/task_description.md)
+
+### View Live: [fireTools](https://firetools-971b5.web.app/)
+
+### Admin Credential
+
+- `admin@admin.com`
+- password: `admin123`
 
 ## Features / what is included in this project
 
@@ -12,12 +19,11 @@ A MERN stack web application built for manufacturer company FireTools where take
 - Show toasts on different events
 - Protected routing
 - Authentication
-- Stripe payment
-
-  - Email - password registration system
-  - SignIn / SignUp with Google
+  - Google Sign In using firebase
+  - Sign up with email and Password
+  - Password reset
   - Email verification
-  - Password reset option
+- Stripe payment
 
 - User
 
@@ -26,6 +32,7 @@ A MERN stack web application built for manufacturer company FireTools where take
   - Give reviews
   - Update their profile
   - Make payment
+  - Observer shipping status
 
 - Admin
 
@@ -48,9 +55,7 @@ A MERN stack web application built for manufacturer company FireTools where take
 - Express
 - JWT etc.
 - cloudinary for image uploads
-- Axios for http requests
-
-## [LIVE SITE](https://firetools-971b5.web.app/)
+- Axios for http requests etc.
 
 ### Server side description of the application can be found [here](https://github.com/programming-hero-web-course1/manufacturer-website-server-side-Ar1f007#readme)
 
@@ -96,6 +101,5 @@ Screenshots of few pages of the website.
 
 ## Author
 
-- Facebook - [@4r1f007](https://www.facebook.com/4r1f007/)
-- Instagram - [@\_4r1f](https://www.instagram.com/_4r1f)
+- LinkedIn - [Ariful Hoque Al Amin](https://www.linkedin.com/in/ariful-hoque-al-amin-71b717161/)
 - Twitter - [@Ar1f007](https://twitter.com/Ariif_007)

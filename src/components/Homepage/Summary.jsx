@@ -1,24 +1,10 @@
 import { ImRocket } from 'react-icons/im';
 import { stats } from '../../utils/stats';
 import { Stat } from '../shared/Stat';
-import { motion } from 'framer-motion';
 
 export const Summary = () => {
   return (
-    <motion.div
-      initial={{ y: 200, opacity: 0 }}
-      whileInView={{
-        y: 0,
-        opacity: 1,
-      }}
-      transition={{
-        type: 'spring',
-        bounce: 0.4,
-        duration: 1,
-      }}
-      viewport={{ once: true }}
-      className="max-w-[1024px] mx-auto "
-    >
+    <div className="max-w-[1024px] mx-auto ">
       <div className="flex justify-center items-center">
         <h2 className="text-center font-bold text-neutral text-3xl">Our Business keeps growing</h2>
         <i>
@@ -41,6 +27,6 @@ export const Summary = () => {
           ))}
         </section>
       </div>
-    </motion.div>
+    </div>
   );
 };

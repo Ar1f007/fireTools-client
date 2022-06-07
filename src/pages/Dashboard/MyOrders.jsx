@@ -23,18 +23,11 @@ export const MyOrders = () => {
   const { data: orderList, isLoading, refetch } = useQuery('data', fetchOrders);
 
   const handleCancel = async (orderId, productId, orderQuantity) => {
-    const res = await confirmModal(
-      'You want to cancel your order?',
-      'Yes, cancel it',
-      'No',
-      'Success',
-      'success',
-      'Your order is cancelled successfully'
-    );
+    const res = await confirmModal('You want to cancel your order?', 'Yes, cancel it', 'No');
 
     if (res.isConfirmed) {
       const response = await authFetch.delete(`/orders/cancel/${orderId}`);
-      console.log(response);
+
       if (response.status === 200) {
         await authFetch.put(`/products/update-available-quantity/${productId}`, {
           quantity: orderQuantity,

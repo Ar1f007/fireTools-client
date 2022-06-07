@@ -29,16 +29,16 @@ export const AddReview = () => {
       return;
     }
 
-    const createdAt = new Date().getTime();
+    try {
+      const { data: response } = await authFetch.post('/reviews', data);
 
-    const { data: response } = await authFetch.post('/reviews', { ...data, createdAt });
-
-    if (response.insertedId) {
+      if (response.insertedId) {
+        setIsAddingReview(false);
+        customAlert('success', 'Your review was successfully added');
+      }
+    } catch (error) {
       setIsAddingReview(false);
-      customAlert('success', 'Your review was successfully added');
     }
-
-    setIsAddingReview(false);
   };
 
   useEffect(() => {

@@ -73,18 +73,20 @@ export const ProductDetails = () => {
       paid: false,
     };
 
-    const { data: response } = await authFetch.post('/orders', orderData);
-    if (response.acknowledged) {
-      const availableQuantity = data?.available_quantity - values.orderQuantity;
-      await authFetch.put(`/products/${id}`, { available_quantity: availableQuantity });
+    try {
+      const { data: response } = await authFetch.post('/orders', orderData);
+      if (response.acknowledged) {
+        const availableQuantity = data?.available_quantity - values.orderQuantity;
+        await authFetch.put(`/products/${id}`, { available_quantity: availableQuantity });
 
-      customAlert('success', 'Order is placed');
-      navigate('/dashboard/my-orders');
+        customAlert('success', 'Order is placed');
+        navigate('/dashboard/my-orders');
 
+        setIsPlacingOrder(false);
+      }
+    } catch (error) {
       setIsPlacingOrder(false);
     }
-
-    setIsPlacingOrder(false);
   };
 
   if (isLoading || loading) {

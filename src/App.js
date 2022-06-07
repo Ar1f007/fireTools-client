@@ -18,6 +18,7 @@ import {
   Payment,
   Blog,
   ResetPassword,
+  MyReviews,
 } from './pages';
 import { GetAllProducts } from './pages/GetAllProducts';
 
@@ -35,6 +36,7 @@ function App() {
             <Route index element={<MyProfile />} />
             <Route path="my-orders" element={<MyOrders />} />
             <Route path="add-review" element={<AddReview />} />
+            <Route path="my-reviews" element={<MyReviews />} />
             <Route path="payment" element={<Payment />} />
 
             <Route element={<RequireAdmin />}>

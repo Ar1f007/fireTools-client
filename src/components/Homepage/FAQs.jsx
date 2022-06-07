@@ -1,18 +1,11 @@
 import question from '../../assets/icons/question.svg';
-import { motion } from 'framer-motion';
 
 export const FAQs = () => {
   return (
     <section className="py-16 lg:pb-28">
-      <motion.h2
-        initial={{ y: 100, opacity: 0.3 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        viewport={{ once: true }}
-        className="text-center text-xl lg:text-3xl font-bold text-gray-700 -mt-12 mb-16"
-      >
+      <h2 className="text-center text-xl lg:text-3xl font-bold text-gray-700 -mt-12 mb-16">
         Frequently Asked Questions
-      </motion.h2>
+      </h2>
       <div className="w-full max-w-screen-2xl mx-auto lg:grid grid-cols-2 md:px-8 xl:px-0">
         <div className="max-w-lg">
           <img src={question} alt="question icon w-full" />

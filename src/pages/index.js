@@ -11,6 +11,7 @@ export { Dashboard } from './Dashboard/Dashboard';
 export { MyOrders } from './Dashboard/MyOrders';
 export { AddReview } from './Dashboard/AddReview';
 export { MyProfile } from './Dashboard/MyProfile';
+export { MyReviews } from './Dashboard/MyReviews';
 export { Payment } from './Dashboard/Payment';
 
 export { AllUsers } from './Dashboard/Admin/AllUsers';

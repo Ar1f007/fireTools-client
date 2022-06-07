@@ -55,7 +55,8 @@ A MERN stack B2B web application built for manufacturer company FireTools where 
 - Express
 - JWT etc.
 - cloudinary for image uploads
-- Axios for http requests etc.
+- Axios for http requests
+- React query for data fetching etc.
 
 ### Server side description of the application can be found [here](https://github.com/programming-hero-web-course1/manufacturer-website-server-side-Ar1f007#readme)
 

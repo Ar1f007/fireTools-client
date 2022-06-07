@@ -20,6 +20,7 @@ export const ProductDetails = () => {
   const [user, loading] = useAuthState(auth);
   const [admin] = useCheckAdmin(user);
   const navigate = useNavigate();
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
   const fetchData = async () => {
     const { data } = await authFetch(`/products/details/${id}`);
@@ -58,6 +59,7 @@ export const ProductDetails = () => {
   }, [data, setValue]);
 
   const onSubmit = async (values) => {
+    setIsPlacingOrder(true);
     const orderData = {
       name: values.name,
       email: values.email,
@@ -78,7 +80,11 @@ export const ProductDetails = () => {
 
       customAlert('success', 'Order is placed');
       navigate('/dashboard/my-orders');
+
+      setIsPlacingOrder(false);
     }
+
+    setIsPlacingOrder(false);
   };
 
   if (isLoading || loading) {
@@ -270,13 +276,15 @@ export const ProductDetails = () => {
               <button
                 type="submit"
                 className={`mt-8 w-full px-4 py-2 tracking-wide btn font-normal normal-case text-base ${
-                  loading && 'loading'
+                  isPlacingOrder && 'loading'
                 }`}
                 disabled={
-                  errors.orderQuantity || data?.available_quantity < data?.min_order_quantity
+                  errors.orderQuantity ||
+                  data?.available_quantity < data?.min_order_quantity ||
+                  isPlacingOrder
                 }
               >
-                {!loading && 'Place Order'}
+                {!isPlacingOrder && 'Place Order'}
               </button>
               {/* Submit button */}
             </form>

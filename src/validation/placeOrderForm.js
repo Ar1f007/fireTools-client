@@ -10,11 +10,6 @@ const schema = yup.object({
     .string()
     .required('Phone number is required')
     .matches(phoneRegExp, 'Phone number is not valid'),
-  // orderQuantity: yup
-  //   .number()
-  //   .required('Quantity is required')
-  //   .positive('Must be greater than zero')
-  //   .typeError('Quantity should be a number'),
 });
 
 export default schema;

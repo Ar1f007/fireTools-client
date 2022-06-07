@@ -4,7 +4,7 @@ import Filter from 'bad-words';
 import reviewSchema from '../../validation/reviewSchema';
 import customAlert from '../../utils/CustomAlert';
 import authFetch from '../../config/axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 const filter = new Filter();
 
 export const AddReview = () => {
@@ -16,13 +16,16 @@ export const AddReview = () => {
   } = useForm({
     resolver: yupResolver(reviewSchema),
   });
+  const [isAddingReview, setIsAddingReview] = useState(false);
 
   const onSubmit = async (data) => {
+    setIsAddingReview(true);
     const isTestimonialNotClean = filter.isProfane(data.testimonial);
     const isNameNotClean = filter.isProfane(data.name);
 
     if (isTestimonialNotClean || isNameNotClean) {
       customAlert('warning', 'Can not contain bad words! Please review it');
+      setIsAddingReview(false);
       return;
     }
 
@@ -31,8 +34,11 @@ export const AddReview = () => {
     const { data: response } = await authFetch.post('/reviews', { ...data, createdAt });
 
     if (response.insertedId) {
+      setIsAddingReview(false);
       customAlert('success', 'Your review was successfully added');
     }
+
+    setIsAddingReview(false);
   };
 
   useEffect(() => {
@@ -104,7 +110,12 @@ export const AddReview = () => {
 
           <p className="text-sm text-error mt-1">{errors.ratings?.message}</p>
 
-          <button className="btn w-full mt-6">Submit</button>
+          <button
+            className={`btn w-full mt-6 ${isAddingReview && 'loading'}`}
+            disabled={isAddingReview}
+          >
+            {!isAddingReview && 'Submit'}
+          </button>
         </form>
       </div>
     </section>

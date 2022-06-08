@@ -21,6 +21,7 @@ import {
   MyReviews,
   GetAllProducts,
   AllReviews,
+  EditProduct,
 } from './pages';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
               <Route path="manage-all-orders" element={<AllOrders />} />
               <Route path="add-product" element={<AddProduct />} />
               <Route path="manage-products" element={<AllProducts />} />
+              <Route path="products/:id" element={<EditProduct />} />
             </Route>
           </Route>
         </Route>

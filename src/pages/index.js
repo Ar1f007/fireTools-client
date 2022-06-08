@@ -20,3 +20,4 @@ export { AllUsers } from './Dashboard/Admin/AllUsers';
 export { AllOrders } from './Dashboard/Admin/AllOrders';
 export { AllProducts } from './Dashboard/Admin/AllProducts';
 export { AddProduct } from './Dashboard/Admin/AddProduct';
+export { EditProduct } from './Dashboard/Admin/EditProduct';

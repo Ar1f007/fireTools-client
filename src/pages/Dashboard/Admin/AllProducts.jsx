@@ -126,7 +126,12 @@ export const AllProducts = () => {
                       <Link to={`/products/details/${product._id}`} className="btn btn-xs">
                         Details
                       </Link>
-                      <button className="btn btn-accent btn-xs">Edit</button>
+                      <Link
+                        to={`/dashboard/products/${product._id}`}
+                        className="btn btn-accent btn-xs"
+                      >
+                        Edit
+                      </Link>
                       <button
                         onClick={() => handleDelete(product._id)}
                         className="btn btn-error btn-xs"

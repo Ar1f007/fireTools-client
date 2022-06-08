@@ -5,14 +5,18 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { useQuery } from 'react-query';
-import authFetch from '../../config/axios';
+import { useNavigate } from 'react-router-dom';
 import { Ratings } from '../../components';
+
+import authFetch from '../../config/axios';
 
 const fetchReviews = async () => {
   const { data } = await authFetch('/reviews');
   return data;
 };
+
 export const Reviews = () => {
+  const navigate = useNavigate();
   const { data } = useQuery('data', fetchReviews);
 
   return (
@@ -129,7 +133,7 @@ export const Reviews = () => {
                 </div>
               </div>
             </div>
-            {/* mobile */}
+
             <div className="flex justify-center gap-4 mt-8 lg:hidden">
               <button
                 aria-label="Previous slide"
@@ -173,14 +177,20 @@ export const Reviews = () => {
             </div>
           </div>
           <div className="lg:hidden absolute -bottom-16 left-1/2 -translate-x-1/2">
-            <button className="btn btn-outline btn-secondary capitalize tracking-wider">
+            <button
+              onClick={() => navigate('/reviews')}
+              className="btn btn-outline btn-secondary capitalize tracking-wider"
+            >
               Read More
               <i>
                 <BsArrowRight className="text-2xl ml-1" />
               </i>
             </button>
           </div>
-          <div className="hidden lg:block absolute lg:bottom-4 right-0 lg:px-20 xl:px-0">
+          <div
+            onClick={() => navigate('/reviews')}
+            className="hidden lg:block absolute lg:bottom-4 right-0 lg:px-20 xl:px-0"
+          >
             <button className="btn btn-outline btn-secondary px-5 capitalize tracking-wider">
               Read More
               <i>

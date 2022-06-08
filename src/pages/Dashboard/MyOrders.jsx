@@ -3,12 +3,12 @@ import { useQuery } from 'react-query';
 import { Spinner } from '../../components';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
+import { confirmModal } from '../../utils/ConfirmModal';
+import { useNavigate } from 'react-router-dom';
 
 import authFetch from '../../config/axios';
 import auth from '../../config/firebase';
-import { confirmModal } from '../../utils/ConfirmModal';
 import MySwal from '../../config/sweetAlert';
-import { useNavigate } from 'react-router-dom';
 
 export const MyOrders = () => {
   const [user, loading] = useAuthState(auth);

@@ -1,10 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Filter from 'bad-words';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import reviewSchema from '../../validation/reviewSchema';
 import customAlert from '../../utils/CustomAlert';
 import authFetch from '../../config/axios';
-import { useEffect, useState } from 'react';
+import Filter from 'bad-words';
 const filter = new Filter();
 
 export const AddReview = () => {
@@ -17,6 +19,7 @@ export const AddReview = () => {
     resolver: yupResolver(reviewSchema),
   });
   const [isAddingReview, setIsAddingReview] = useState(false);
+  const navigate = useNavigate(true);
 
   const onSubmit = async (data) => {
     setIsAddingReview(true);
@@ -35,6 +38,7 @@ export const AddReview = () => {
       if (response.insertedId) {
         setIsAddingReview(false);
         customAlert('success', 'Your review was successfully added');
+        navigate('/dashboard/my-reviews');
       }
     } catch (error) {
       setIsAddingReview(false);

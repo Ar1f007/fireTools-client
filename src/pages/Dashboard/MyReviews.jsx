@@ -2,10 +2,10 @@ import { useQuery } from 'react-query';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Spinner } from '../../components';
 import { MdOutlineDateRange } from 'react-icons/md';
+import { confirmModal } from '../../utils/ConfirmModal';
 
 import auth from '../../config/firebase';
 import authFetch from '../../config/axios';
-import { confirmModal } from '../../utils/ConfirmModal';
 import MySwal from '../../config/sweetAlert';
 import customAlert from '../../utils/CustomAlert';
 

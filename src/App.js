@@ -19,8 +19,9 @@ import {
   Blog,
   ResetPassword,
   MyReviews,
+  GetAllProducts,
+  AllReviews,
 } from './pages';
-import { GetAllProducts } from './pages/GetAllProducts';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/blogs" element={<Blog />} />
         <Route path="/products" element={<GetAllProducts />} />
+        <Route path="/reviews" element={<AllReviews />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

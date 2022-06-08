@@ -36,7 +36,7 @@ export const ToolCard = ({ item }) => {
         <div className="flex mt-6">
           <Link
             to={`/products/details/${_id}`}
-            className="btn-md btn btn-outline w-full text-gray-800 tracking-wide font-bold"
+            className="btn-md btn btn-outline w-full text-gray-800 dark:text-gray-300 tracking-wide font-bold"
           >
             Order now
           </Link>

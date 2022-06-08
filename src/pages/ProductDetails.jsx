@@ -94,7 +94,7 @@ export const ProductDetails = () => {
   }
 
   return (
-    <section className="bg-slate-50 min-h-[70vh] px-5 py-16">
+    <section className="bg-slate-50 dark:bg-neutral min-h-[70vh] px-5 py-16">
       <div className={`grid grid-cols-1 ${!admin && 'xl:grid-cols-2'} max-w-screen-2xl mx-auto`}>
         <div className="flex flex-col lg:flex-row gap-5 lg:items-center">
           {/* Image */}
@@ -105,20 +105,22 @@ export const ProductDetails = () => {
 
           {/* Description */}
           <div>
-            <h1 className="text-2xl font-bold text-neutral">{data?.name}</h1>
-            <p className="text-base text-gray-600 my-4">{data?.description}</p>
+            <h1 className="text-2xl font-bold text-neutral dark:text-gray-300">{data?.name}</h1>
+            <p className="text-base text-gray-600 my-4 dark:text-gray-400">{data?.description}</p>
 
             <div className="py-4">
               <div className="my-1 xl:max-w-[75%] flex justify-between">
-                <p className="font-semibold text-neutral">Price</p>
+                <p className="font-semibold text-neutral dark:text-gray-300">Price</p>
                 <p>${data?.price.toFixed(2)} / unit</p>
               </div>
               <div className="my-1 xl:max-w-[75%] flex justify-between">
-                <p className="font-semibold text-neutral">Available Quantity</p>
+                <p className="font-semibold text-neutral dark:text-gray-300">Available Quantity</p>
                 <p>{data?.available_quantity}</p>
               </div>
               <div className="my-1 xl:max-w-[75%] flex justify-between">
-                <p className="font-semibold text-neutral">Minimum order quantity</p>
+                <p className="font-semibold text-neutral dark:text-gray-300">
+                  Minimum order quantity
+                </p>
                 <p>{data?.min_order_quantity}</p>
               </div>
             </div>
@@ -277,7 +279,7 @@ export const ProductDetails = () => {
               {/* Submit button */}
               <button
                 type="submit"
-                className={`mt-8 w-full px-4 py-2 tracking-wide btn font-normal normal-case text-base ${
+                className={`mt-8 w-full px-4 py-2 tracking-wide btn font-normal normal-case text-base dark:btn-outline ${
                   isPlacingOrder && 'loading'
                 }`}
                 disabled={

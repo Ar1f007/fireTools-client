@@ -38,7 +38,11 @@ export const NewsLetter = () => {
 
             <button className="btn btn-primary">Subscribe</button>
           </form>
-          {errors?.email && <p className="text-sm text-gray-800 my-2">{errors?.email?.message}</p>}
+          {errors?.email && (
+            <p className="text-sm text-gray-800 my-2 dark:text-gray-200">
+              {errors?.email?.message}
+            </p>
+          )}
         </div>
       </div>
     </section>

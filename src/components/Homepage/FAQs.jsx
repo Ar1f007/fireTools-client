@@ -3,7 +3,7 @@ import question from '../../assets/icons/question.svg';
 export const FAQs = () => {
   return (
     <section className="py-16 lg:pb-28">
-      <h2 className="text-center text-xl lg:text-3xl font-bold text-gray-700 -mt-12 mb-16">
+      <h2 className="text-center text-xl lg:text-3xl font-bold text-gray-700 -mt-12 mb-16 dark:text-gray-200">
         Frequently Asked Questions
       </h2>
       <div className="w-full max-w-screen-2xl mx-auto lg:grid grid-cols-2 md:px-8 xl:px-0">

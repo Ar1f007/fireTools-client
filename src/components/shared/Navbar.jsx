@@ -83,7 +83,7 @@ export const Navbar = () => {
         )}
 
         {user && !loading && (
-          <button className="btn glass normal-case text-gray-600 mr-3 hidden lg:flex px-4">
+          <button className="btn glass dark:btn-outline normal-case text-gray-600 dark:text-gray-300 mr-3 hidden lg:flex px-4">
             {user?.displayName}
           </button>
         )}

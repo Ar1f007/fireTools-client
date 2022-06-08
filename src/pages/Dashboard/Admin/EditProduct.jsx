@@ -6,12 +6,13 @@ import authFetch from '../../../config/axios';
 import MySwal from '../../../config/sweetAlert';
 import customAlert from '../../../utils/CustomAlert';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Spinner } from '../../../components';
 
 export const EditProduct = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
@@ -66,6 +67,7 @@ export const EditProduct = () => {
           const serverResponse = await authFetch.put(`/products/details/${id}`, productInfo);
           if (serverResponse.status === 204) {
             setLoading(false);
+            navigate('/dashboard/manage-products');
             reset();
             MySwal.fire('Success', 'Product was updated', 'success');
           }
@@ -74,6 +76,8 @@ export const EditProduct = () => {
         customAlert('error', 'Something went wrong');
         setLoading(false);
       }
+
+      setLoading(false);
     };
 
     postImage();
@@ -209,7 +213,7 @@ export const EditProduct = () => {
           </div>
           <p className="text-sm text-error mt-1">{errors.image?.message}</p>
 
-          <button className={`btn w-full mt-6 ${loading && 'loading'}`}>
+          <button className={`btn w-full mt-6 ${loading && 'loading'}`} disabled={loading}>
             {!loading && 'Update'}
           </button>
         </form>

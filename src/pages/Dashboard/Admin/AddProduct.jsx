@@ -25,8 +25,8 @@ export const AddProduct = () => {
     formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 
     const postImage = async () => {
-      setLoading(true);
       try {
+        setLoading(true);
         const response = await axios.post(
           'https://api.cloudinary.com/v1_1/dv3wezqsc/image/upload',
           formData
@@ -55,6 +55,8 @@ export const AddProduct = () => {
         customAlert('error', 'Something went wrong');
         setLoading(false);
       }
+
+      setLoading(false);
     };
 
     postImage();
@@ -177,7 +179,7 @@ export const AddProduct = () => {
           </div>
           <p className="text-sm text-error mt-1">{errors.image?.message}</p>
 
-          <button className={`btn w-full mt-6 ${loading && 'loading'}`}>
+          <button className={`btn w-full mt-6 ${loading && 'loading'}`} disabled={loading}>
             {!loading && 'Add Product'}
           </button>
         </form>

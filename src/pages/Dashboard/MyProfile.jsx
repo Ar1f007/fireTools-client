@@ -23,8 +23,9 @@ const fetchUserData = async () => {
   const { data } = await authFetch('/users/my-profile');
   return data;
 };
+
 export const MyProfile = () => {
-  const { data: user, isLoading, refetch } = useQuery('user', fetchUserData);
+  const { data, isLoading, refetch } = useQuery('user', fetchUserData);
   const [showForm, setShowForm] = useState(false);
 
   const handleEditProfile = () => {
@@ -49,7 +50,7 @@ export const MyProfile = () => {
           <div className="avatar">
             <figure className="max-w-[280px]">
               <img
-                src={user?.image || avatar}
+                src={data.user?.image || avatar}
                 alt="user"
                 className="w-full rounded-full border-2"
               />
@@ -59,14 +60,18 @@ export const MyProfile = () => {
 
           {/* EDIT PROFILE FORM */}
           {showForm && (
-            <EditProfile handleEditProfile={handleEditProfile} user={user} refetch={refetch} />
+            <EditProfile
+              handleEditProfile={handleEditProfile}
+              user={data?.user}
+              refetch={refetch}
+            />
           )}
           {/* EDIT PROFILE FORM */}
 
           {/* other's info */}
           {!showForm && (
             <div className="py-3 text-gray-800">
-              <h2 className="text-2xl font-semibold mb-2">{user?.name}</h2>
+              <h2 className="text-2xl font-semibold mb-2">{data?.user?.name}</h2>
 
               {/* Edit Profile */}
               <button
@@ -77,13 +82,13 @@ export const MyProfile = () => {
               </button>
 
               {/* Edit Profile */}
-              <p className="text-[15px] font-normal mb-5 xl:w-[80%]">{user?.bio || 'N/A'}</p>
+              <p className="text-[15px] font-normal mb-5 xl:w-[80%]">{data?.user?.bio || 'N/A'}</p>
               {/* Education */}
               <div className="flex items-center gap-2 text-[15px] mb-2 text-gray-800">
                 <i>
                   <FaUniversity className="text-gray-600 text-lg" />
                 </i>
-                <span>University : {user?.education || 'N/A'}</span>
+                <span>University : {data?.user?.education || 'N/A'}</span>
               </div>
 
               {/* Location */}
@@ -91,7 +96,7 @@ export const MyProfile = () => {
                 <i>
                   <GoLocation className="text-gray-600 text-lg" />
                 </i>
-                <span>{user?.location || 'N/A'}</span>
+                <span>{data?.user?.location || 'N/A'}</span>
               </div>
 
               {/* Phone */}
@@ -99,7 +104,7 @@ export const MyProfile = () => {
                 <i>
                   <AiOutlinePhone className="text-gray-600 text-lg" />
                 </i>
-                <a href={`tel:${user?.phone}`}>{user?.phone || 'N/A'}</a>
+                <a href={`tel:${data?.user?.phone}`}>{data?.user?.phone || 'N/A'}</a>
               </div>
 
               {/* Email*/}
@@ -111,7 +116,7 @@ export const MyProfile = () => {
                 <i>
                   <AiOutlineMail className="text-gray-600 text-lg" />
                 </i>
-                <a href={`mailto:${user.email}`}>{user?.email || 'N/A'}</a>
+                <a href={`mailto:${data?.user.email}`}>{data?.user?.email || 'N/A'}</a>
               </div>
 
               {/* Linked In*/}
@@ -123,7 +128,7 @@ export const MyProfile = () => {
                 <i>
                   <AiFillLinkedin className="text-gray-600 text-lg" />
                 </i>
-                <p>{user?.linkedIn || 'N/A'}</p>
+                <p>{data?.user?.linkedIn || 'N/A'}</p>
               </div>
               {/* Twitter*/}
               <div
@@ -134,7 +139,7 @@ export const MyProfile = () => {
                 <i>
                   <AiOutlineTwitter className="text-gray-600 text-lg" />
                 </i>
-                <p>{user?.twitter || 'N/A'}</p>
+                <p>{data?.user?.twitter || 'N/A'}</p>
               </div>
               {/* Twitter*/}
               <div
@@ -145,7 +150,7 @@ export const MyProfile = () => {
                 <i>
                   <AiOutlineGithub className="text-gray-600 text-lg" />
                 </i>
-                <p>{user?.github || 'N/A'}</p>
+                <p>{data?.user?.github || 'N/A'}</p>
               </div>
             </div>
           )}
@@ -164,7 +169,7 @@ export const MyProfile = () => {
                     <BiPurchaseTagAlt className="text-primary w-8 h-8" />
                   </div>
                   <div className="stat-title">Total orders</div>
-                  <div className="stat-value text-primary">{user?.totalOrders || 'n/a'}</div>
+                  <div className="stat-value text-primary">{data?.orders || 'n/a'}</div>
                 </div>
               </div>
 
@@ -176,7 +181,7 @@ export const MyProfile = () => {
                     <MdRateReview className="text-secondary w-8 h-8" />
                   </div>
                   <div className="stat-title">Reviews given</div>
-                  <div className="stat-value text-secondary">{user?.totalReviews || 'n/a'}</div>
+                  <div className="stat-value text-secondary">{data?.reviews || 'n/a'}</div>
                 </div>
               </div>
             </div>
@@ -191,7 +196,7 @@ export const MyProfile = () => {
                   </div>
                   <div className="text-gray-700 font-xl font-bold">Check order status</div>
                   <Link
-                    disabled={user?.role === 'admin'}
+                    disabled={data?.user?.role === 'admin'}
                     to="/dashboard/my-orders"
                     className="btn btn-sm w-max btn-secondary mt-4 normal-case"
                   >
@@ -209,7 +214,7 @@ export const MyProfile = () => {
                   </div>
                   <div className="text-gray-700 font-xl font-bold">Write review</div>
                   <Link
-                    disabled={user?.role === 'admin'}
+                    disabled={data?.user?.role === 'admin'}
                     to="/dashboard/add-review"
                     className="btn btn-sm w-max btn-accent normal-case mt-4"
                   >

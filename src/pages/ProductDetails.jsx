@@ -87,6 +87,7 @@ export const ProductDetails = () => {
     } catch (error) {
       setIsPlacingOrder(false);
     }
+    setIsPlacingOrder(false);
   };
 
   if (isLoading || loading) {

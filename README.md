@@ -2,7 +2,7 @@
 
 A MERN stack B2B web application built for manufacturer company FireTools where customers can make order for electrical tools such as wire and cable crimpers, cable tie gun etc.
 
-### Task description about the project can be found [here](https://github.com/ProgrammingHero1/Manufacturer-website-assignment/blob/main/task_description.md)
+### Task description about the project can be found [here](https://github.com/Ar1f007/fireTools-client/blob/main/TaskDescription.md#task-description)
 
 ### View Live: [fireTools](https://firetools-971b5.web.app/)
 

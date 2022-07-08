@@ -18,6 +18,7 @@ import authFetch from '../../config/axios';
 import avatar from '../../assets/images/avatar.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { MyProfileDropdown } from '../../components/Dashboard/MyProfileDropdown';
 
 const fetchUserData = async () => {
   const { data } = await authFetch('/users/my-profile');
@@ -71,7 +72,10 @@ export const MyProfile = () => {
           {/* other's info */}
           {!showForm && (
             <div className="py-3 text-gray-800">
-              <h2 className="text-2xl font-semibold mb-2">{data?.user?.name}</h2>
+              <div className="flex items-center gap-x-3">
+                <h2 className="text-2xl font-semibold mb-2">{data?.user?.name}</h2>
+                <MyProfileDropdown userId={data?.user?._id} refetch={refetch} />
+              </div>
 
               {/* Edit Profile */}
               <button
@@ -116,7 +120,7 @@ export const MyProfile = () => {
                 <i>
                   <AiOutlineMail className="text-gray-600 text-lg" />
                 </i>
-                <a href={`mailto:${data?.user.email}`}>{data?.user?.email || 'N/A'}</a>
+                <a href={`mailto:${data?.user?.email}`}>{data?.user?.email || 'N/A'}</a>
               </div>
 
               {/* Linked In*/}
@@ -223,6 +227,7 @@ export const MyProfile = () => {
                 </div>
               </div>
             </div>
+            {/* second row - second col */}
           </div>
         </div>
       </section>

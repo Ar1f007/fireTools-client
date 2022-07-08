@@ -10,7 +10,7 @@ export const Ticker = ({ end, suffix, decimals }) => {
   };
 
   return (
-    <Waypoint onEnter={onVWEnter}>
+    <Waypoint onEnter={onVWEnter} topOffset={0}>
       {viewPortEntered ? (
         <CountUp end={end} suffix={suffix} start={0} decimals={decimals} duration={3} />
       ) : null}

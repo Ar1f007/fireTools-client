@@ -1,4 +1,4 @@
-import { Banner, FAQs, NewsLetter, Reviews, Summary, Tools } from '../components';
+import { Banner, FAQs, NewsLetter, OrderProcess, Reviews, Summary, Tools } from '../components';
 
 export const Home = () => {
   return (
@@ -7,6 +7,7 @@ export const Home = () => {
       <Tools />
       <Summary />
       <Reviews />
+      <OrderProcess />
       <FAQs />
       <NewsLetter />
     </>

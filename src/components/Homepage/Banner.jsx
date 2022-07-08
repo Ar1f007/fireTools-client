@@ -5,7 +5,7 @@ export const Banner = () => {
     <header className="relative bg-white">
       <img
         className="absolute inset-0 object-[75%] sm:object-[25%] object-cover w-full h-full opacity-25 sm:opacity-100"
-        src="https://i.ibb.co/0CNC3sS/toolshop.jpg"
+        src="https://res.cloudinary.com/dv3wezqsc/image/upload/v1657283226/firetools/toolshop_psaxot.jpg"
         alt="tools"
       />
 

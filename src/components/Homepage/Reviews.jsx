@@ -27,7 +27,6 @@ export const Reviews = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-16 gap-y-8 lg:items-center">
               <div className="max-w-xl text-center sm:text-left">
                 <h2 className="text-neutral text-3xl font-bold tracking-tight sm:text-4xl">
-                  Don't just take our word for it... <br className="hidden sm:block lg:hidden" />
                   Read reviews from our customers
                 </h2>
 

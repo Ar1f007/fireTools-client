@@ -3,8 +3,8 @@ import { signOut } from 'firebase/auth';
 import customAlert from '../utils/CustomAlert';
 import auth from './firebase';
 
-// const url = 'http://localhost:5000';
-const url = 'https://firetools-server.up.railway.app/';
+const url = 'http://localhost:5000';
+// const url = 'https://firetools-server.up.railway.app/';
 const authFetch = axios.create({
   baseURL: url,
 });

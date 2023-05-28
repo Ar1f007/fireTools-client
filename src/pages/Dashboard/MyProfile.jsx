@@ -22,6 +22,7 @@ import { MyProfileDropdown } from '../../components/Dashboard/MyProfileDropdown'
 
 const fetchUserData = async () => {
   const { data } = await authFetch('/users/my-profile');
+
   return data;
 };
 
@@ -36,7 +37,6 @@ export const MyProfile = () => {
   if (isLoading) {
     return <Spinner />;
   }
-
   return (
     <section className="py-10 px-8 xl:px-20">
       {/* <h1 className="text-2xl font-bold text-gray-800 sm:text-3xl mb-5 -mt-4 ">
@@ -61,11 +61,7 @@ export const MyProfile = () => {
 
           {/* EDIT PROFILE FORM */}
           {showForm && (
-            <EditProfile
-              handleEditProfile={handleEditProfile}
-              user={data?.user}
-              refetch={refetch}
-            />
+            <EditProfile handleEditProfile={handleEditProfile} user={data} refetch={refetch} />
           )}
           {/* EDIT PROFILE FORM */}
 
@@ -73,8 +69,8 @@ export const MyProfile = () => {
           {!showForm && (
             <div className="py-3 text-gray-800">
               <div className="flex items-center gap-x-3">
-                <h2 className="text-2xl font-semibold mb-2">{data?.user?.name}</h2>
-                <MyProfileDropdown userId={data?.user?._id} refetch={refetch} />
+                <h2 className="text-2xl font-semibold mb-2">{data?.name}</h2>
+                <MyProfileDropdown userId={data?._id} refetch={refetch} />
               </div>
 
               {/* Edit Profile */}
@@ -86,13 +82,13 @@ export const MyProfile = () => {
               </button>
 
               {/* Edit Profile */}
-              <p className="text-[15px] font-normal mb-5 xl:w-[80%]">{data?.user?.bio || 'N/A'}</p>
+              <p className="text-[15px] font-normal mb-5 xl:w-[80%]">{data?.bio || 'N/A'}</p>
               {/* Education */}
               <div className="flex items-center gap-2 text-[15px] mb-2 text-gray-800">
                 <i>
                   <FaUniversity className="text-gray-600 text-lg" />
                 </i>
-                <span>University : {data?.user?.education || 'N/A'}</span>
+                <span>University : {data?.education || 'N/A'}</span>
               </div>
 
               {/* Location */}
@@ -100,7 +96,7 @@ export const MyProfile = () => {
                 <i>
                   <GoLocation className="text-gray-600 text-lg" />
                 </i>
-                <span>{data?.user?.location || 'N/A'}</span>
+                <span>{data?.location || 'N/A'}</span>
               </div>
 
               {/* Phone */}
@@ -108,7 +104,7 @@ export const MyProfile = () => {
                 <i>
                   <AiOutlinePhone className="text-gray-600 text-lg" />
                 </i>
-                <a href={`tel:${data?.user?.phone}`}>{data?.user?.phone || 'N/A'}</a>
+                <a href={`tel:${data?.phone}`}>{data?.phone || 'N/A'}</a>
               </div>
 
               {/* Email*/}
@@ -120,7 +116,7 @@ export const MyProfile = () => {
                 <i>
                   <AiOutlineMail className="text-gray-600 text-lg" />
                 </i>
-                <a href={`mailto:${data?.user?.email}`}>{data?.user?.email || 'N/A'}</a>
+                <a href={`mailto:${data?.email}`}>{data?.email || 'N/A'}</a>
               </div>
 
               {/* Linked In*/}
@@ -132,7 +128,7 @@ export const MyProfile = () => {
                 <i>
                   <AiFillLinkedin className="text-gray-600 text-lg" />
                 </i>
-                <p>{data?.user?.linkedIn || 'N/A'}</p>
+                <p>{data?.linkedIn || 'N/A'}</p>
               </div>
               {/* Twitter*/}
               <div
@@ -143,7 +139,7 @@ export const MyProfile = () => {
                 <i>
                   <AiOutlineTwitter className="text-gray-600 text-lg" />
                 </i>
-                <p>{data?.user?.twitter || 'N/A'}</p>
+                <p>{data?.twitter || 'N/A'}</p>
               </div>
               {/* Twitter*/}
               <div
@@ -154,7 +150,7 @@ export const MyProfile = () => {
                 <i>
                   <AiOutlineGithub className="text-gray-600 text-lg" />
                 </i>
-                <p>{data?.user?.github || 'N/A'}</p>
+                <p>{data?.github || 'N/A'}</p>
               </div>
             </div>
           )}
@@ -200,7 +196,7 @@ export const MyProfile = () => {
                   </div>
                   <div className="text-gray-700 font-xl font-bold">Check order status</div>
                   <Link
-                    disabled={data?.user?.role === 'admin'}
+                    disabled={data?.role === 'admin'}
                     to="/dashboard/my-orders"
                     className="btn btn-sm w-max btn-secondary mt-4 normal-case"
                   >
@@ -218,7 +214,7 @@ export const MyProfile = () => {
                   </div>
                   <div className="text-gray-700 font-xl font-bold">Write review</div>
                   <Link
-                    disabled={data?.user?.role === 'admin'}
+                    disabled={data?.role === 'admin'}
                     to="/dashboard/add-review"
                     className="btn btn-sm w-max btn-accent normal-case mt-4"
                   >

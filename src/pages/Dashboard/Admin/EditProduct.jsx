@@ -27,6 +27,8 @@ export const EditProduct = () => {
       price: 0,
       availableQuantity: 0,
       minimumOrderQuantity: 0,
+      discount: null,
+      image: null,
     },
     resolver: yupResolver(productSchema),
   });
@@ -39,6 +41,34 @@ export const EditProduct = () => {
   const { data: productInfo, isLoading } = useQuery(['product', id], fetchInfo);
 
   const onSubmit = async (data) => {
+    if (typeof data.image === 'string') {
+      try {
+        setLoading(true);
+        const productInfo = {
+          name: data.productName,
+          description: data.description,
+          price: data.price,
+          available_quantity: data.availableQuantity,
+          min_order_quantity: data.minimumOrderQuantity,
+          image: data.image,
+          discount: data?.discount || null,
+        };
+
+        const serverResponse = await authFetch.put(`/products/details/${id}`, productInfo);
+        if (serverResponse.status === 200) {
+          setLoading(false);
+          navigate('/dashboard/manage-products');
+          reset();
+          MySwal.fire('Success', 'Product was updated', 'success');
+        }
+      } catch (error) {
+        customAlert('error', 'Something went wrong');
+      } finally {
+        setLoading(false);
+      }
+
+      return;
+    }
     const formData = new FormData();
 
     formData.append('file', data.image[0]);
@@ -62,10 +92,11 @@ export const EditProduct = () => {
             available_quantity: data.availableQuantity,
             min_order_quantity: data.minimumOrderQuantity,
             image: img,
+            discount: data?.discount || null,
           };
 
           const serverResponse = await authFetch.put(`/products/details/${id}`, productInfo);
-          if (serverResponse.status === 204) {
+          if (serverResponse.status === 200) {
             setLoading(false);
             navigate('/dashboard/manage-products');
             reset();
@@ -85,12 +116,23 @@ export const EditProduct = () => {
 
   useEffect(() => {
     if (productInfo) {
-      const { name, price, description, min_order_quantity, available_quantity } = productInfo;
+      const {
+        name,
+        price,
+        description,
+        min_order_quantity,
+        available_quantity,
+        image,
+        discount = 0,
+      } = productInfo;
       setValue('productName', name);
       setValue('description', description);
       setValue('price', price);
       setValue('minimumOrderQuantity', min_order_quantity);
       setValue('availableQuantity', available_quantity);
+      setValue('image', image);
+      setValue('discount', discount);
+      console.log(image);
     }
   }, [productInfo, setValue]);
 
@@ -194,6 +236,24 @@ export const EditProduct = () => {
           </div>
           <p className="text-sm text-error mt-1">{errors.minimumOrderQuantity?.message}</p>
 
+          {/* Discount  */}
+          <div className="mt-4">
+            <label
+              className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+              htmlFor="discount"
+            >
+              Discount (%)
+            </label>
+            <input
+              type="text"
+              placeholder="Enter discount percentage"
+              id="discount"
+              className="input input-bordered w-full"
+              {...register('discount')}
+            />
+          </div>
+          <p className="text-sm text-error mt-1">{errors.discount?.message}</p>
+
           {/* Image */}
           <div className="mt-4">
             <label
@@ -210,6 +270,12 @@ export const EditProduct = () => {
               aria-label="pick an image for product"
               className="block w-full max-w-lg text-sm text-neutral file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-normal file:text-gray-700 file:bg-gray-300 hover:file:bg-neutral hover:file:text-base-100 hover:file:pointer focus:border-gray-300 cursor-pointer"
             />
+
+            <div className="card card-compact w-96 bg-base-100 shadow-xl mt-4">
+              <figure>
+                <img src={productInfo?.image} alt="product" />
+              </figure>
+            </div>
           </div>
           <p className="text-sm text-error mt-1">{errors.image?.message}</p>
 

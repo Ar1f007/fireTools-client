@@ -8,7 +8,7 @@ const fetchReviews = async () => {
   return data;
 };
 export const AllReviews = () => {
-  const { data: reviews, isLoading } = useQuery('all-reviews', fetchReviews);
+  const { data: reviews, isLoading } = useQuery('reviews', fetchReviews);
   const [avgRating, setAvgRating] = useState(0);
 
   useEffect(() => {

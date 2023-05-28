@@ -21,11 +21,35 @@ const productSchema = yup.object({
   image: yup
     .mixed()
     .test('required', 'You need to provide an image of the product', (value) => {
+      // Pass the validation if value is a string
+      if (typeof value === 'string') {
+        return true;
+      }
+
       return value && value.length;
     })
-    .test('fileSize', 'Image size can not be larger than 2mb', (value) => {
+    .test('fileSize', 'Image size cannot be larger than 2mb', (value) => {
+      // Skip the size check if value is a string
+      if (typeof value === 'string') {
+        return true;
+      }
+
       return value && value[0]?.size <= 2000000;
     }),
+  discount: yup
+    .mixed()
+    .test('is-valid', 'Value should be between 0 to 100', (value) => {
+      if (value === undefined || value === null) {
+        return true;
+      }
+
+      if (value < 0 || value > 100) {
+        return false;
+      }
+
+      return true;
+    })
+    .typeError('Add discount value (number)'),
 });
 
 export default productSchema;

@@ -42,6 +42,7 @@ export const AddProduct = () => {
             available_quantity: data.availableQuantity,
             min_order_quantity: data.minimumOrderQuantity,
             image: img,
+            discount: data.discount || null,
           };
 
           const serverResponse = await authFetch.post('/products', productInfo);
@@ -159,6 +160,26 @@ export const AddProduct = () => {
             />
           </div>
           <p className="text-sm text-error mt-1">{errors.minimumOrderQuantity?.message}</p>
+
+          {/* Discount  */}
+          <div className="mt-4">
+            <label
+              className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+              htmlFor="discount"
+            >
+              Discount (%)
+            </label>
+            <input
+              type="text"
+              placeholder="Enter discount percentage"
+              id="discount"
+              className="input input-bordered w-full"
+              {...register('discount', {
+                valueAsNumber: true,
+              })}
+            />
+          </div>
+          <p className="text-sm text-error mt-1">{errors.discount?.message}</p>
 
           {/* Image */}
           <div className="mt-4">

@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom';
 import cutShortText from '../../utils/cutShortText';
+import getDiscountedPrice from '../../utils/discountedPrice';
 
 export const ToolCard = ({ item }) => {
-  const { _id, name, description, min_order_quantity, available_quantity, price, image } = item;
+  const {
+    _id,
+    name,
+    description,
+    min_order_quantity,
+    available_quantity,
+    price,
+    image,
+    discount = 0,
+  } = item;
 
   return (
     <div className="max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
@@ -18,9 +28,11 @@ export const ToolCard = ({ item }) => {
 
         <div className="flex items-center justify-between flex-wrap gap-2 mt-2 text-gray-700 dark:text-gray-200">
           <div className="badge badge-outline">
-            Price:
             <span className="ml-1 font-medium">
-              ${price.toFixed(2)} / <span className="text-sm">unit</span>
+              {/* ${price.toFixed(2)} / <span className="text-sm">unit</span> */}
+              {discount > 0 ? <s>${price.toFixed(2)}</s> : <>${price.toFixed(2)}</>}
+              {discount > 0 && <>&nbsp;{getDiscountedPrice(price, discount)}</>} /&nbsp;
+              <span className="text-sm">unit</span>
             </span>
           </div>
           <div className="badge badge-outline">

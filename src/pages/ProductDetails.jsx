@@ -10,12 +10,21 @@ import { useEffect, useState } from 'react';
 import customAlert from '../utils/CustomAlert';
 import { useCheckAdmin } from '../hooks/useCheckAdmin';
 import { ImWarning } from 'react-icons/im';
+import getDiscountedPrice from '../utils/discountedPrice';
 
 const phoneRegex =
   /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const fetchUserData = async () => {
+  const { data } = await authFetch('/users/my-profile');
+
+  return data;
+};
+
 export const ProductDetails = () => {
+  const { data: userData, isLoading: userDataLoading } = useQuery('user', fetchUserData);
+
   const { id } = useParams();
   const [user, loading] = useAuthState(auth);
   const [admin] = useCheckAdmin(user);
@@ -38,8 +47,8 @@ export const ProductDetails = () => {
     defaultValues: {
       name: user?.displayName,
       email: user?.email,
-      address: '',
-      phoneNumber: '',
+      address: userData?.location || '',
+      phoneNumber: userData?.phone || '',
       orderQuantity: data?.min_order_quantity,
     },
     mode: 'onChange',
@@ -58,6 +67,16 @@ export const ProductDetails = () => {
     }
   }, [data, setValue]);
 
+  const getTotal = () => {
+    if (data?.discount > 0) {
+      return (
+        getDiscountedPrice(data?.price, data?.discount, false) * getValues('orderQuantity')
+      ).toFixed(2);
+    }
+
+    return (data?.price * getValues('orderQuantity')).toFixed(2);
+  };
+
   const onSubmit = async (values) => {
     setIsPlacingOrder(true);
     const orderData = {
@@ -66,7 +85,7 @@ export const ProductDetails = () => {
       address: values.address,
       phoneNumber: values.phoneNumber,
       orderQuantity: values.orderQuantity,
-      total: values.orderQuantity * data.price,
+      total: +getTotal(),
       productName: data.name,
       productId: id,
       userId: user.uid,
@@ -90,7 +109,7 @@ export const ProductDetails = () => {
     setIsPlacingOrder(false);
   };
 
-  if (isLoading || loading) {
+  if (isLoading || loading || userDataLoading) {
     return <Spinner />;
   }
 
@@ -112,7 +131,18 @@ export const ProductDetails = () => {
             <div className="py-4">
               <div className="my-1 xl:max-w-[75%] flex justify-between">
                 <p className="font-semibold text-neutral dark:text-gray-300">Price</p>
-                <p>${data?.price.toFixed(2)} / unit</p>
+                {/* <p>${data?.price.toFixed(2)} / unit</p> */}
+                <p>
+                  {data?.discount > 0 ? (
+                    <s>${data?.price.toFixed(2)}</s>
+                  ) : (
+                    <>${data?.price.toFixed(2)}</>
+                  )}
+                  {data?.discount > 0 && (
+                    <>&nbsp;{getDiscountedPrice(data?.price, data?.discount)}</>
+                  )}{' '}
+                  /&nbsp; <span className="text-sm">unit</span>
+                </p>
               </div>
               <div className="my-1 xl:max-w-[75%] flex justify-between">
                 <p className="font-semibold text-neutral dark:text-gray-300">Available Quantity</p>
@@ -270,10 +300,7 @@ export const ProductDetails = () => {
               <div className="flex items-center gap-2 mt-3">
                 <p className="text-base font-semibold text-gray-600">Total:</p>
                 <span className="text-base text-success font-semibold">
-                  ${' '}
-                  {errors.orderQuantity || stockIsLow
-                    ? 0
-                    : (data?.price * getValues('orderQuantity')).toFixed(2)}
+                  $ {errors.orderQuantity || stockIsLow ? 0 : getTotal()}
                 </span>
               </div>
 

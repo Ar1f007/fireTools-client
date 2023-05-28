@@ -7,12 +7,12 @@ import authFetch from '../../../config/axios';
 import MySwal from '../../../config/sweetAlert';
 
 const fetchData = async () => {
-  const { data } = await authFetch('/products');
+  const { data } = await authFetch('/all-products');
   return data;
 };
 
 export const AllProducts = () => {
-  const { data: productList, isLoading, refetch } = useQuery('products', fetchData);
+  const { data: productList, isLoading, refetch } = useQuery('allProducts', fetchData);
 
   const handleDelete = async (prodId) => {
     const res = await confirmModal('You want to delete this product?', 'Yes, delete', 'No, cancel');
@@ -152,7 +152,7 @@ export const AllProducts = () => {
                     <div className="flex items-center">
                       Name
                       <i>
-                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700" />
+                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700 rotate-180" />
                       </i>
                     </div>
                   </th>
@@ -161,7 +161,7 @@ export const AllProducts = () => {
                     <div className="flex items-center">
                       Price
                       <i>
-                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700" />
+                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700 rotate-180" />
                       </i>
                     </div>
                   </th>
@@ -170,7 +170,7 @@ export const AllProducts = () => {
                     <div className="flex items-center">
                       Available Quantity
                       <i>
-                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700" />
+                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700 rotate-180" />
                       </i>
                     </div>
                   </th>
@@ -178,7 +178,7 @@ export const AllProducts = () => {
                     <div className="flex items-center">
                       Minimum Order
                       <i>
-                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700" />
+                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700 rotate-180" />
                       </i>
                     </div>
                   </th>
@@ -186,7 +186,7 @@ export const AllProducts = () => {
                     <div className="flex items-center">
                       Actions
                       <i>
-                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700" />
+                        <MdOutlineKeyboardArrowDown className="w-4 h-4 ml-1.5 text-gray-700 rotate-180" />
                       </i>
                     </div>
                   </th>

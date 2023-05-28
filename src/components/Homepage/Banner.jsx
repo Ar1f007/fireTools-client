@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export const Banner = () => {
   return (
-    <header className="relative bg-white">
+    <header className="relative bg-white bg-fixed bg-no-repeat bg-cover">
       <img
         className="absolute inset-0 object-[75%] sm:object-[25%] object-cover w-full h-full opacity-25 sm:opacity-100"
         src="https://res.cloudinary.com/dv3wezqsc/image/upload/v1657283226/firetools/toolshop_psaxot.jpg"

@@ -25,7 +25,6 @@ export const EditProfile = ({ user, handleEditProfile, refetch }) => {
       refetch();
     }
   };
-
   return (
     <div className="py-3">
       <form onSubmit={handleSubmit(onSubmit)}>

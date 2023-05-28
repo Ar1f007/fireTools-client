@@ -5,6 +5,7 @@ export { Reviews } from './Homepage/Reviews';
 export { NewsLetter } from './Homepage/NewsLetter';
 export { FAQs } from './Homepage/FAQs';
 export { OrderProcess } from './Homepage/OrderProcess';
+export { TrendingProducts } from './Homepage/TrendingProducts';
 
 export { Navbar } from './shared/Navbar';
 export { Stat } from './shared/Stat';

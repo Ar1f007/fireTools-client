@@ -119,7 +119,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <p className="mt-8 text-xs text-gray-500">&copy; 2022 FireTools</p>
+        <p className="mt-8 text-xs text-gray-500">&copy; {new Date().getFullYear()} FireTools</p>
       </div>
     </footer>
   );
